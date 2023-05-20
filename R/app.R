@@ -25,7 +25,7 @@ abTestApp <- function() {
                        menuItem("A/B Test", icon = icon("th"),
                                 tabName = "menu_top"),
                        menuItem("Github", icon = icon("github"),
-                                href = "https://github.com/wjakethompson/abtest"))),
+                                href = "https://github.com/wjakethompson/ab-test"))),
     ## body -----
     dashboardBody(theme_wjake_shiny,
       posteriorUI("post")
