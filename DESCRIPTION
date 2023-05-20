@@ -1,10 +1,11 @@
 Package: ab-test
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Bayesian A/B Testing
+Version: 0.1.0
 Authors@R: 
     person("W. Jake", "Thompson", , "wjakethompson@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7339-0300"))
-Description: What the package does (one paragraph).
+Description: Conduct A/B tests for two conditions and/or two groups. The Shiny
+    App will show the marginal and conditional conversion rates and contrasts.
 License: GPL-3
 Imports: 
     dplyr,
