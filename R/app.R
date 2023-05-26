@@ -1,20 +1,10 @@
-library(shiny)
-library(shinydashboard)
-library(htmltools)
-library(dplyr)
-library(tidyr)
-library(forcats)
-library(rstanarm)
-library(glue)
-library(ggplot2)
-library(hrbrthemes)
-library(ggdist)
-library(ggtext)
-library(showtext)
-
-sysfonts::font_add_google("Source Sans Pro", "Source Sans Pro")
-
+#' Run the A/B Test Shiny App
+#'
+#' @return A shiny app.
+#' @export
 abTestApp <- function() {
+  sysfonts::font_add_google("Source Sans Pro", "Source Sans Pro")
+  
   ui <- dashboardPage(
     title = "A/B Testing",
     ## header -----

@@ -42,8 +42,6 @@ objective <- function(theta, x, prob, ...) {
   delta(fit, prob)
 }
 
-quiet_nlm <- purrr::quietly(nlm)
-
 #' Find Beta distribution shape parameters
 #'
 #' Given two proportions and their quantile values, find the Beta shape
@@ -71,6 +69,7 @@ calc_beta <- function(x1 = 0.05, p1 = 0.025, x2 = 0.95, p2 = 0.975) {
   x <- c(x1, x2)
   x_p <- logit(c(p1, p2))
 
+  quiet_nlm <- purrr::quietly(stats::nlm)
   sol <- quiet_nlm(f = objective, p = log(c(1, 1)),
                    x = x, prob = x_p, lower = 0, upper = 1,
                    typsize = c(1, 1), fscale = 1e-12, gradtol = 1e-12)
