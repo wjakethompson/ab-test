@@ -1,12 +1,13 @@
-Package: ab-test
+Package: abtest
 Title: Bayesian A/B Testing
 Version: 0.1.0
 Authors@R: 
     person("W. Jake", "Thompson", , "wjakethompson@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7339-0300"))
-Description: Conduct A/B tests for two conditions and/or two groups. The Shiny
-    App will show the marginal and conditional conversion rates and contrasts.
-License: GPL-3
+Description: Conduct A/B tests for two conditions and/or two groups. The
+    Shiny App will show the marginal and conditional conversion rates and
+    contrasts.
+License: GPL (>= 3)
 Imports: 
     dplyr,
     forcats,
@@ -14,14 +15,23 @@ Imports:
     ggplot2,
     ggtext,
     glue,
-    hrbrthemes,
     htmltools,
+    magrittr,
     pkgload,
+    purrr,
+    rlang,
     rstanarm,
     shiny,
     shinydashboard,
     showtext,
-    tidyr
+    stats,
+    sysfonts,
+    tibble,
+    tidyr,
+    tippy,
+    wjake
+Remotes:
+    wjakethompson/wjake
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
