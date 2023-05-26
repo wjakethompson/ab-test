@@ -1,2 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.github$
+^app\.R$
+^LICENSE\.md$
+^rsconnect$
