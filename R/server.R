@@ -19,40 +19,37 @@ posteriorServer <- function(id) {
       mod_prior <- rstanarm::normal(location = logit_prior$location,
                           scale = logit_prior$scale)
       
-      # marginal by condition -----
-      cond_dat <- dat |> 
-        dplyr::summarize(vis = sum(.data$vis), con = sum(.data$con), .by = "cond")
-      cond_mod <- rstanarm::stan_glm(cbind(con, vis - con) ~ 0 + cond, data = cond_dat,
+      # fit model -----
+      full_dat <- dat |> 
+        dplyr::mutate(full_group = paste0(.data$cond, "_", .data$group),
+                      full_group = factor(.data$full_group, levels = c("A_1", "B_1", "A_2", "B_2")))
+      full_mod <- rstanarm::stan_glm(cbind(con, vis - con) ~ 0 + full_group, data = full_dat,
                                      family = "binomial", iter = 4000, warmup = 2000,
                                      chains = 4, refresh = 0,
                                      prior = mod_prior)
-      cond_preds <- rstanarm::posterior_epred(cond_mod,
-                                              new_data = tibble::tibble(cond = c("A", "B"))) |>
-        tibble::as_tibble(.name_repair = ~c("A", "B"))
-      
-      # marginal by group -----
-      group_dat <- dat |> 
-        dplyr::summarize(vis = sum(.data$vis), con = sum(.data$con), .by = "group")
-      group_mod <- rstanarm::stan_glm(cbind(con, vis - con) ~ 0 + group, data = group_dat,
-                            family = "binomial", iter = 4000, warmup = 2000,
-                            chains = 4, refresh = 0,
-                            prior = mod_prior)
-      group_preds <- rstanarm::posterior_epred(group_mod,
-                                    new_data = tibble::tibble(cond = c("1", "2"))) |>
-        tibble::as_tibble(.name_repair = ~c("1", "2"))
-      
-      # conditional -----
-      full_dat <- dat |> 
-        dplyr::mutate(full_group = paste0(.data$cond, "_", .data$group),
-               full_group = factor(.data$full_group, levels = c("A_1", "B_1", "A_2", "B_2")))
-      full_mod <- rstanarm::stan_glm(cbind(con, vis - con) ~ 0 + full_group, data = full_dat,
-                           family = "binomial", iter = 4000, warmup = 2000,
-                           chains = 4, refresh = 0,
-                           prior = mod_prior)
       full_preds <- rstanarm::posterior_epred(full_mod,
-                                     new_data = tibble::tibble(cond = c("A_1", "B_1",
-                                                                "A_2", "B_2"))) |>
+                                              new_data = tibble::tibble(cond = c("A_1", "B_1",
+                                                                                 "A_2", "B_2"))) |>
         tibble::as_tibble(.name_repair = ~c("A_1", "B_1", "A_2", "B_2"))
+      
+      marg_preds <- full_preds |> 
+        tibble::rowid_to_column(var = "draw") |> 
+        tidyr::pivot_longer(-"draw") |> 
+        tidyr::separate(.data$name, c("cond", "group"), sep = "_") |> 
+        dplyr::left_join(dat, by = c("group", "cond")) |> 
+        dplyr::mutate(vis = dplyr::case_when(vis == 0L ~ 1L, TRUE ~ .data$vis))
+      
+      cond_preds <- marg_preds |> 
+        dplyr::summarize(avg = weighted.mean(.data$value, .data$vis),
+                         .by = c("draw", "cond")) |> 
+        tidyr::pivot_wider(names_from = "cond", values_from = "avg") |> 
+        dplyr::select(-"draw")
+        
+      group_preds <- marg_preds |> 
+        dplyr::summarize(avg = weighted.mean(.data$value, .data$vis),
+                         .by = c("draw", "group")) |> 
+        tidyr::pivot_wider(names_from = "group", values_from = "avg") |> 
+        dplyr::select(-"draw")
       
       # return -----
       list(cond_preds = cond_preds,
