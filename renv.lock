@@ -157,18 +157,6 @@
       ],
       "Hash": "d1fa8fae6a47e88bb46d5152312bd8bd"
     },
-    "XML": {
-      "Package": "XML",
-      "Version": "3.99-0.14",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "methods",
-        "utils"
-      ],
-      "Hash": "e5c8af79df616c135b21eaeb1dc6bc5c"
-    },
     "abind": {
       "Package": "abind",
       "Version": "1.4-5",
@@ -190,16 +178,6 @@
         "sys"
       ],
       "Hash": "e8a22846fff485f0be3770c2da758713"
-    },
-    "assertthat": {
-      "Package": "assertthat",
-      "Version": "0.2.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "tools"
-      ],
-      "Hash": "50c838a310445e954bc13f26f26a6ecf"
     },
     "backports": {
       "Package": "backports",
@@ -1616,17 +1594,6 @@
       ],
       "Hash": "5f919ae5e7f83a6f91dcf2288943370d"
     },
-    "rJava": {
-      "Package": "rJava",
-      "Version": "1.0-6",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "methods"
-      ],
-      "Hash": "0415819f6baa75d86d52483f7292b623"
-    },
     "ragg": {
       "Package": "ragg",
       "Version": "1.2.5",
@@ -2072,30 +2039,6 @@
       ],
       "Hash": "5f5a7629f956619d519205ec475fe647"
     },
-    "staplr": {
-      "Package": "staplr",
-      "Version": "3.2.1",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteUsername": "pridiltal",
-      "RemoteRepo": "staplr",
-      "RemoteRef": "master",
-      "RemoteSha": "ea3887fe5aacfe4477621767722b71205beb69b1",
-      "Requirements": [
-        "R",
-        "XML",
-        "assertthat",
-        "fs",
-        "glue",
-        "pdftools",
-        "purrr",
-        "rJava",
-        "stringr",
-        "tcltk"
-      ],
-      "Hash": "6d662bbd7cffc851fd2f837c6590a148"
-    },
     "stringi": {
       "Package": "stringi",
       "Version": "1.7.12",
@@ -2424,8 +2367,8 @@
       "RemoteUsername": "wjakethompson",
       "RemoteRepo": "wjake",
       "RemoteRef": "main",
-      "RemoteSha": "05675d1e76cadbaf3a458da08d46a4e31cee459f",
-      "Remotes": "atlas-aai/ratlas, pridiltal/staplr",
+      "RemoteSha": "682ac1876b5d5c9e24eb1138c6867acfbcac344d",
+      "Remotes": "atlas-aai/ratlas,",
       "Requirements": [
         "R",
         "bookdown",
@@ -2437,17 +2380,17 @@
         "hrbrthemes",
         "knitr",
         "magrittr",
+        "pdftools",
         "ratlas",
         "rlang",
         "rmarkdown",
         "rstudioapi",
         "scales",
         "showtextdb",
-        "staplr",
         "stringr",
         "sysfonts"
       ],
-      "Hash": "e26bfaedf3389367c9d89ca31c01d59e"
+      "Hash": "02cadf2503184e34c5c5a5353b330b3f"
     },
     "xaringan": {
       "Package": "xaringan",
